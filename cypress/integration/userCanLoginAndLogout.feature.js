@@ -54,13 +54,6 @@ describe("user can login", () => {
         method: "POST",
         url: "http://localhost:3000/api/auth/sign_in",
         response: "fixture:user_can_register.json",
-        headers: {
-          uid: "registered@user.com",
-          access_token: "test_token",
-          client: "1337",
-          token_type: "Bearer",
-          expiry: 123456
-        },
       });
       cy.route({
         method: 'POST',
@@ -74,7 +67,7 @@ describe("user can login", () => {
     it("with valid credentials", () => {
       cy.get("[data-cy='log-in-button']").click();
       cy.get("[data-cy='log-in-form']").within(() => {
-        cy.get("[data-cy='log-in-email']").type("registered@user.com");
+        cy.get("[data-cy='log-in-email']").type("wrong@user.com");
         cy.get("[data-cy='log-in-password']").type("wrong");
         cy.get("[data-cy='log-in-submit-btn']").click();
         // cy.get("[data-cy='log-in-button']").should("not.be.visible");

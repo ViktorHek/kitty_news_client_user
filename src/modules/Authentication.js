@@ -60,10 +60,10 @@ const logIn = async (event, dispatch) => {
       },
       await headers
     )
-    // dispatch({
-    //   type: "SET_CURRENT_USER",
-    //   payload: response.data,
-    // })
+    dispatch({
+      type: "SET_CURRENT_USER",
+      payload: response.data,
+    })
     // dispatch({ type: "CLOSE_LOGIN_FORM" })
     dispatch({
       type: 'SET_LOGIN_SUCCESS_MESSAGE',
