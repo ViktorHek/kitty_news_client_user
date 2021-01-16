@@ -27,6 +27,11 @@ describe("user can login", () => {
         url: "http://localhost:3000/api/auth/validate_token**",
         response: "fixture:user_can_register.json",
       });
+      cy.route({
+        method: 'POST',
+        url: 'http://localhost:3000/api/auth/sign_in',
+        response: { message: "login successfull"},
+      })
       cy.visit("/");
     });
     it("with valid credentials", () => {
@@ -35,8 +40,55 @@ describe("user can login", () => {
         cy.get("[data-cy='log-in-email']").type("registered@user.com");
         cy.get("[data-cy='log-in-password']").type("password");
         cy.get("[data-cy='log-in-submit-btn']").click();
-        cy.get("[data-cy='log-in-button']").should("not.be.visible");
+        // cy.get("[data-cy='log-in-button']").should("not.be.visible");
       });
+      cy.get('[data-cy="log-in-success-message"]').contains(
+        "login successfull"
+      )
+    });
+  });
+
+  describe("successfully", () => {
+    beforeEach(() => {
+      cy.route({
+        method: "POST",
+        url: "http://localhost:3000/api/auth/sign_in",
+        response: "fixture:user_can_register.json",
+        headers: {
+          uid: "registered@user.com",
+          access_token: "test_token",
+          client: "1337",
+          token_type: "Bearer",
+          expiry: 123456
+        },
+      });
+      cy.route({
+        method: "GET",
+        url: "http://localhost:3000/api/auth/validate_token**",
+        response: "fixture:user_can_register.json",
+      });
+      cy.route({
+        method: 'POST',
+        url: 'http://localhost:3000/api/auth/sign_in',
+        response: {
+          data: {
+            message: "login successfull"
+          }
+        },
+      })
+      cy.visit("/");
+    });
+    it("with valid credentials", () => {
+      cy.get("[data-cy='log-in-button']").click();
+      cy.get("[data-cy='log-in-form']").within(() => {
+        cy.get("[data-cy='log-in-email']").type("registered@user.com");
+        cy.get("[data-cy='log-in-password']").type("password");
+        cy.get("[data-cy='log-in-submit-btn']").click();
+        // cy.get("[data-cy='log-in-button']").should("not.be.visible");
+      });
+      cy.get('[data-cy="log-in-success-message"]').contains(
+        "login successfull"
+      )
     });
   });
 

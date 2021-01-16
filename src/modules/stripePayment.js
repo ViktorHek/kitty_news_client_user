@@ -4,6 +4,7 @@ import store from '../state/store/configureStore'
 const performPayment = async (stripeToken) => {
   let headers = JSON.parse(localStorage.getItem('J-tockAuth-Storage'))
   try {
+    debugger
     const response = await axios.post(
       '/subscriptions',
       { stripeToken: stripeToken },

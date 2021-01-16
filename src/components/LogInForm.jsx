@@ -4,14 +4,16 @@ import {useDispatch, useSelector} from "react-redux"
 import {logIn} from "../modules/Authentication"
 
 const LogInForm = () => {
-  const { logInErrorMessage, logInModalOpen } = useSelector((state) => state)
+  const { logInSuccessMessage, logInModalOpen } = useSelector((state) => state)
   const dispatch = useDispatch()
+
+  // logInErrorMessage
 
   return (
     <>
       <Modal
         closeIcon
-        onClose={() => dispatch({ type: "CLOSE_LOGIN_FORM" })}
+        // onClose={() => dispatch({ type: "CLOSE_LOGIN_FORM" })}
         onOpen={() => dispatch({ type: "OPEN_LOGIN_FORM" })}
         open={logInModalOpen}
         trigger={
@@ -51,9 +53,9 @@ const LogInForm = () => {
           </Form>
         </Modal.Content>
         <Modal.Description>
-          {logInErrorMessage && (
-            <Message data-cy="log-in-error-message" negative>
-              {logInErrorMessage}
+          {logInSuccessMessage && (
+            <Message data-cy="log-in-success-message" negative>
+              {logInSuccessMessage}
             </Message>
           )}
         </Modal.Description>

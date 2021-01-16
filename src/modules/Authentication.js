@@ -58,13 +58,17 @@ const logIn = async (event, dispatch) => {
         email: event.target.email.value,
         password: event.target.password.value,
       },
-      { headers: headers }
+      await headers
     )
+    // dispatch({
+    //   type: "SET_CURRENT_USER",
+    //   payload: response.data,
+    // })
+    // dispatch({ type: "CLOSE_LOGIN_FORM" })
     dispatch({
-      type: "SET_CURRENT_USER",
-      payload: response.data,
+      type: 'SET_LOGIN_SUCCESS_MESSAGE',
+      payload: response.data.message,
     })
-    dispatch({ type: "CLOSE_LOGIN_FORM" })
   } catch (error) {
     debugger
     dispatch({
