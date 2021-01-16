@@ -67,13 +67,13 @@ const logIn = async (event, dispatch) => {
     // dispatch({ type: "CLOSE_LOGIN_FORM" })
     dispatch({
       type: 'SET_LOGIN_SUCCESS_MESSAGE',
-      payload: response.data.message,
+      payload: "You are logged in!",
     })
   } catch (error) {
     debugger
     dispatch({
-      type: "REGISTER_ERROR_MESSAGE",
-      payload: error.response.data.errors.full_messages[0],
+      type: "SET_LOGIN_ERROR_MESSAGE",
+      payload: "Invalid login credentials",
     })
     dispatch({ type: "OPEN_LOGIN_FORM" })
   }

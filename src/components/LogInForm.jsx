@@ -1,14 +1,15 @@
 import React from "react"
 import { Form, Button, Icon, Modal, Message } from "semantic-ui-react"
-import {useDispatch, useSelector} from "react-redux"
-import {logIn} from "../modules/Authentication"
+import { useDispatch, useSelector } from "react-redux"
+import { logIn } from "../modules/Authentication"
 
 const LogInForm = () => {
-  const { logInSuccessMessage, logInModalOpen } = useSelector((state) => state)
+  const { logInSuccessMessage, logInErrorMessage, logInModalOpen } = useSelector((state) => state)
   const dispatch = useDispatch()
 
   // logInErrorMessage
 
+  // logInErrorMessage
   return (
     <>
       <Modal
@@ -56,6 +57,11 @@ const LogInForm = () => {
           {logInSuccessMessage && (
             <Message data-cy="log-in-success-message" negative>
               {logInSuccessMessage}
+            </Message>
+          )}
+          {logInErrorMessage && (
+            <Message data-cy="log-in-error-message" negative>
+              {logInErrorMessage}
             </Message>
           )}
         </Modal.Description>

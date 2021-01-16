@@ -30,7 +30,7 @@ describe("user can login", () => {
       cy.route({
         method: 'POST',
         url: 'http://localhost:3000/api/auth/sign_in',
-        response: { message: "login successfull"},
+        response: { message: "You are logged in!"},
       })
       cy.visit("/");
     });
@@ -43,12 +43,12 @@ describe("user can login", () => {
         // cy.get("[data-cy='log-in-button']").should("not.be.visible");
       });
       cy.get('[data-cy="log-in-success-message"]').contains(
-        "login successfull"
+        "You are logged in!"
       )
     });
   });
 
-  describe("successfully", () => {
+  describe("unsuccessfully", () => {
     beforeEach(() => {
       cy.route({
         method: "POST",
@@ -63,17 +63,10 @@ describe("user can login", () => {
         },
       });
       cy.route({
-        method: "GET",
-        url: "http://localhost:3000/api/auth/validate_token**",
-        response: "fixture:user_can_register.json",
-      });
-      cy.route({
         method: 'POST',
         url: 'http://localhost:3000/api/auth/sign_in',
         response: {
-          data: {
-            message: "login successfull"
-          }
+            message: "Invalid login credentials"
         },
       })
       cy.visit("/");
@@ -82,12 +75,12 @@ describe("user can login", () => {
       cy.get("[data-cy='log-in-button']").click();
       cy.get("[data-cy='log-in-form']").within(() => {
         cy.get("[data-cy='log-in-email']").type("registered@user.com");
-        cy.get("[data-cy='log-in-password']").type("password");
+        cy.get("[data-cy='log-in-password']").type("wrong");
         cy.get("[data-cy='log-in-submit-btn']").click();
         // cy.get("[data-cy='log-in-button']").should("not.be.visible");
       });
-      cy.get('[data-cy="log-in-success-message"]').contains(
-        "login successfull"
+      cy.get('[data-cy="log-in-error-message"]').contains(
+        "login unsuccessfull"
       )
     });
   });

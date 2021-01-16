@@ -49,12 +49,17 @@ const rootReducer = (state = initialState, action) => {
     //     ...state,
     //     logInModalOpen: false,
     //   }
-    case 'SET_LOGIN_SUCCESS_MESSAGE':
+    case "SET_LOGIN_SUCCESS_MESSAGE":
       debugger
       return {
         ...state,
         logInSuccessMessage: action.payload,
-        loginErrorMessage: ""
+      }
+    case "SET_LOGIN_ERROR_MESSAGE":
+      debugger
+      return {
+        ...state,
+        logInErrorMessage: action.payload,
       }
     case "OPEN_PAYMENT_FORM":
       return {
