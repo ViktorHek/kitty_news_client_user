@@ -16,7 +16,7 @@ This is the web application for users of Kitty News. Visitors can only see a lis
 - [Github](https://github.com/CraftAcademy/kitty_news_client_user)
 - The admin user interface, mobile application and API can be found here:
   - [API](https://github.com/CraftAcademy/kitty_news_api)
-  - [Admin User Interface](https://github.com/CraftAcademy/kitty_news_client_admin)
+  - [Admin User Interface](https://github.com/ViktorHek/kitty_news_client_admin_extra)
   - [Mobile](https://github.com/CraftAcademy/kitty_news_client_mobile)
 
 ## User stories
